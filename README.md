@@ -1,6 +1,6 @@
 # nn
 
-### *A ground truth engine for the Indonesian economy*
+### *A gauge panel for the Indonesian economic loop*
 
 ---
 
@@ -59,6 +59,35 @@ We measure what has not been measured. We explain what has not been explained. W
 
 **The model must be open.** Every number this project produces must be traceable to its source. Every assumption must be named. Every gap in the data must be visible as a gap, not hidden as a false certainty. Anyone must be able to check our work, challenge our inputs, and improve our methodology. The goal is not to be the authority. The goal is to be the most honest instrument available.
 
+**This instrument takes no sides.** The worker who cannot cover real costs and the factory owner who cannot raise prices without losing customers are not opponents. They are two participants in the same miscalibrated loop — neither broke it, both are paying for it. The warung owner who held IDR 2,000 for 20 years was not stubborn. The factory that closed was not weak. Both were making rational decisions based on signals that were incomplete. This instrument shows all of them what they could not see — and it does so without assigning blame.
+
+---
+
+## What This Instrument Is
+
+Think of the cockpit of an aircraft.
+
+The gauge panel does not fly the plane. It does not tell the pilot what to do. It has no opinion about the destination. It simply shows **what is actually happening** — clearly, honestly, in real time — so that whoever is making decisions can make them with true information instead of false information.
+
+Right now, Indonesia's economic pilots — policy makers, business owners, labor unions, workers — are flying with a gauge panel that is missing several instruments entirely, showing clipped readings on others, calibrated for a different aircraft, and running on data that arrives 12 months late.
+
+They are not bad pilots. They are flying blind on bad instruments.
+
+Sinyal Sejati is the gauge panel they never had. Each node in the economic feedback loop gets a gauge:
+
+- **Wage gauge** — true wage vs cost-of-living adjusted wage. Are workers above or below the real waterline?
+- **Price gauge** — true producer cost vs what the market can actually absorb. How much suppressed pressure?
+- **Spending gauge** — true consumer purchasing power vs what income figures suggest. How stretched is the bottom 40%?
+- **Revenue gauge** — is industry revenue actually covering real input costs, or is it being slowly hollowed out?
+
+And one master gauge:
+
+- **Loop health** — is the system self-regulating, or is pressure building toward a snap?
+
+The warkop price holding at IDR 2,000 for 20 years, then snapping to IDR 5,000 in two years — that is what a loop health gauge in the red looks like. The instrument would have shown it building. A controlled release would have been possible. The snap was not inevitable. It was the consequence of flying without instruments.
+
+The goal is not to explain what broke. The goal is to make sure the next break can be seen coming — and that a smoother path exists for everyone in the loop.
+
 ---
 
 ## What This Is Not
@@ -70,6 +99,18 @@ This is not a political project. We have no preferred government, no preferred p
 This is not an academic project seeking publication or citation. Papers may result from this work, but they are not the goal. The goal is understanding, in the hands of the people who need it most.
 
 This is not finished. It will never be finished. It is an instrument, and instruments are always being calibrated.
+
+---
+
+## What This Will Prove
+
+The economic feedback loop — wages → spending → industry revenue → prices → wages — is not broken by nature. It is a self-regulating system. When it runs cleanly, everyone adjusts gradually. The warung raises prices slowly. The factory raises prices slowly. The worker receives real wage growth slowly. Nobody gets rich fast, but nobody gets crushed either.
+
+This instrument will demonstrate, with traceable data, that the loop has been suppressed at multiple points simultaneously — not by any single actor, not by malice, but by a combination of political pressure, import competition, structural informality, and above all, a measurement framework that could not see the true signals.
+
+It will show where the suppression happened. When it started. How much pressure accumulated. And what a controlled, gradual release of that pressure would have looked like for each participant — vs what a snap looks like.
+
+The loop is not broken. It was held shut. It can be unblocked. That is the proof this instrument exists to make.
 
 ---
 
