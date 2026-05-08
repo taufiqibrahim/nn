@@ -1,6 +1,12 @@
-# Roadmap
+# nn — Roadmap
 
 > The roadmap serves the mission. If an implementation detail conflicts with the compass in README.md, the compass wins. Always.
+
+---
+
+## A note on the name
+
+This project is called `nn` — no name, or close enough to type. The internal name *Sinyal Sejati* captures the spirit. `nn` is what you type in the terminal. Neither requires explanation before the work does.
 
 ---
 
@@ -22,34 +28,56 @@ There are no deadlines. The instrument becomes true when it is ready, not when a
 - `README.md` — the vision, mission, and sole goals. ✓ Done
 - `ROADMAP.md` — this document. ✓ Done
 - State variable definition — name and define the 6–8 things the model will track
-- CRD schema v0.1 — a YAML specification for variables, plugins, and outputs
 
 **Gate:**
-> The schema is reviewable and legible to an economist who has never heard of Kubernetes.
+> The variable list is writable on one page and explainable without a diagram.
 
 ---
 
-## Phase 1 — Proof of Concept
+## Phase 1 — Feel the Data
 
-**Goal:** Produce one real number that did not exist before.
+**Goal:** Understand the data before designing anything around it. No schema. No engine. No architecture. Just notebooks, raw sources, and honest exploration.
+
+A schema designed before you have touched the data is fiction. The notebooks will reveal what the data actually is — what is clean, what is missing, what surprises, what the official numbers really mean when you pull them apart. The schema comes after. Not before.
 
 **Achievables:**
-- Plugin v0.1 — BPS CPI downloader
-  - Must reproduce official BPS numbers exactly when fed BPS inputs
-  - This is the calibration anchor — if we cannot match BPS, we cannot credibly diverge from it
-- Plugin v0.2 — Tokopedia/Shopee sachet scraper
-  - Collects sachet vs standard-pack unit prices across core FMCG categories
+
+*Tier 1 — Directly reproducible (BPS raw → BPS published)*
+- Notebook 01 — BPS CPI headline reproduction
+  - Pull raw BPS CPI data, reproduce the published monthly headline number exactly
+  - This is the calibration anchor: if we cannot match their number with their inputs, we cannot credibly diverge from it
+- Notebook 02 — BPS CPI by expenditure group
+  - Reproduce Food & Beverages and Processed Food sub-indices specifically
+  - This is where the sachet economy lives
+- Notebook 03 — BPS CPI by province/city
+  - Jakarta vs Surabaya vs Makassar divergence already exists in official data
+  - Reproducing it builds the regional pipeline and reveals how much geography matters
+
+*Tier 2 — BPS-adjacent, economists use as standard*
+- Notebook 04 — Core vs volatile vs administered price decomposition
+  - BPS publishes this breakdown; reproducing it forces understanding of what they classify as "volatile" — mostly food, which is most of what the bottom 40% buys
+- Notebook 05 — Susenas implied unit costs
+  - Household spending ÷ quantities = implicit unit price per quintile
+  - BPS publishes both sides; this is the first direct view into what different income tiers actually pay per gram
+
+*Tier 3 — First divergence: the sachet signal*
+- Notebook 06 — Tokopedia/Shopee sachet vs box price scraper
+  - Collect sachet vs standard-pack unit prices across core FMCG categories
+  - Compute per-gram premium: sachet cost ÷ box cost for equivalent weight
   - Coverage: 2018 to present
-- State estimator v0.1 — simple Kalman filter
-  - Two inputs: Plugin v0.1 and Plugin v0.2
-  - Produces best estimate of true effective price index for bottom 40%
-- Output: sachet premium divergence curve vs official CPI, 2018–2025
-  - Confidence intervals shown honestly
-  - Data gaps labeled as gaps, not hidden as false certainty
-  - Every data point traceable to its source
+- Notebook 07 — First divergence curve
+  - Plot Susenas implied unit cost (Notebook 05) vs BPS CPI vs sachet premium (Notebook 06)
+  - This is the first number that did not exist before
+  - Show confidence intervals honestly. Label gaps as gaps.
+
+*Schema emerges here — not before*
+- After notebooks are complete: draft CRD schema v0.1
+  - The schema is written from what the data taught, not from what was assumed
+  - YAML specification for variables, plugins, and outputs
+  - Written to be legible to an economist who has never heard of Kubernetes
 
 **Gate:**
-> The divergence number and what it means can be explained to a warung owner in Surabaya in under two minutes, without losing accuracy.
+> The divergence number from Notebook 07 can be explained to a warung owner in Surabaya in under two minutes, without losing accuracy. The schema reflects what was learned, not what was planned.
 
 ---
 
@@ -75,17 +103,57 @@ There are no deadlines. The instrument becomes true when it is ready, not when a
 - Ledger layer implementation
   - Every data point carries: source ID, variable, value, timestamp, confidence, known bias flags, ingestion hash
   - Every model update is auditable end-to-end
+- State estimator v0.1 — Kalman filter
+  - Fuses all plugin outputs into best estimate of true hidden state
+  - Confidence intervals widen where data is sparse — the uncertainty is part of the result, not a weakness to hide
 - Full output: 2000–2025 divergence series
-  - Confidence bands widen visibly where data is sparse
-  - The uncertainty is part of the result, not a weakness to hide
 - Internal peer review
-  - Full adversarial review between project and itself
-  - Every assumption attacked
-  - Every weak data source challenged
+  - Full adversarial review: every assumption attacked, every weak source challenged
   - Document what survives and what was revised
 
 **Gate:**
 > The methodology survives an adversarial review. Every number can be challenged specifically — not dismissed generally.
+
+---
+
+## Phase 2B — The Comparison
+
+**Goal:** Prove the Indonesian signature is structurally abnormal — not just different — by running the same instrument on comparable economies.
+
+A healthy economic loop, when disturbed, oscillates and converges back to equilibrium. Small adjustments. Continuous damping. What the instrument detects in Indonesia is the opposite: long rigidity followed by violent release. Clamped, not stable.
+
+To prove this is a structural failure and not a natural condition, we need a control group. Economies that faced the same disturbances — China import competition, global commodity shocks, post-COVID supply chains — but whose loops show a different signature on the same gauges.
+
+**Why comparison matters:**
+- Without it, the findings can be dismissed as a critique of Indonesian policy
+- With it, the findings become: *Indonesia is an outlier among comparable economies — and the difference is measurable*
+- The comparison is not to rank countries or assign blame. It is to validate the instrument and prove the signal is real
+
+**Comparison economies:**
+- **Vietnam** — most critical. Same regional context, same China competition pressure, same padat karya manufacturing base. But wages rose more continuously, prices adjusted more regularly, manufacturing expanded. If Vietnam shows convergent oscillation while Indonesia shows flat-then-snap on the same gauges — that is the proof.
+- **Bangladesh** — garment-heavy, similar income tier, similar external pressures. Reveals which specific suppressors matter most by showing a different suppression profile.
+- **Thailand 1995–2010** — slightly ahead on the development curve. Shows what a loop looks like as it transitions from suppressed to more freely adjusting.
+- **South Korea 1975–1995** — the archetype. A loop that was permitted to oscillate and converge. Wages rose with productivity. Prices adjusted continuously. The result was not magic — it was a loop that was allowed to function.
+
+**Achievables:**
+- Plugin v0.7 — comparative economy data ingestion
+  - Same variables, same methodology, applied to Vietnam, Bangladesh, Thailand
+  - Sources: World Bank microdata, ILO wage surveys, each country's national statistics office
+  - Confidence flags applied consistently across all countries
+- Oscillation signature analysis
+  - For each economy: plot the waveform at each loop node
+  - Measure: frequency of adjustment, amplitude of adjustments, convergence behavior after disturbance
+- Side-by-side loop health output
+  - Same gauge panel, multiple countries, same time period
+  - The visual proof: one waveform converges, one does not
+  - No statistics degree required to read the difference
+
+**What this proves:**
+
+The loop is not broken by nature. It is broken because specific, identifiable suppressors prevented the continuous small adjustments that allow a loop to self-regulate. Other countries at the same income level, facing the same pressures, show different signatures. The damage was not inevitable. That is what the comparison proves.
+
+**Gate:**
+> Side-by-side signatures are legible without explanation. A person who has never studied economics can look at the two waveforms and understand which one is healthy and which one is not.
 
 ---
 
