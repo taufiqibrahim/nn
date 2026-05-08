@@ -104,11 +104,19 @@ This is not finished. It will never be finished. It is an instrument, and instru
 
 ## What This Will Prove
 
+> *Indonesia has been stuck in a "low-wage, artificially-low-price" trap — which sounds like it should help the poor, but actually destroys the industrial base that the poor depend on for employment.*
+
+This is the thesis. Everything the instrument is built to demonstrate lives in that sentence.
+
+It sounds like a paradox. Lower prices should protect the poor. Controlled wages should protect jobs. But the instrument will show, with traceable data and measurable signals, that the opposite is true — that the trap is self-defeating for every participant simultaneously. The worker loses. The factory loses. The warung loses. The economy loses. Not because anyone made a wrong decision, but because the system was held in a configuration that appears stable from the outside while destroying the industrial base from within.
+
 The economic feedback loop — wages → spending → industry revenue → prices → wages — is not broken by nature. It is a self-regulating system. When it runs cleanly, everyone adjusts gradually. The warung raises prices slowly. The factory raises prices slowly. The worker receives real wage growth slowly. Nobody gets rich fast, but nobody gets crushed either.
 
 This instrument will demonstrate, with traceable data, that the loop has been suppressed at multiple points simultaneously — not by any single actor, not by malice, but by a combination of political pressure, import competition, structural informality, and above all, a measurement framework that could not see the true signals.
 
 It will show where the suppression happened. When it started. How much pressure accumulated. And what a controlled, gradual release of that pressure would have looked like for each participant — vs what a snap looks like.
+
+It will show, through comparison with economies whose loops ran more freely, that the flat-then-snap waveform Indonesia produced is not a natural condition. It is the signature of a clamped system. And clamped systems do not converge to stable. They converge to failure.
 
 The loop is not broken. It was held shut. It can be unblocked. That is the proof this instrument exists to make.
 
