@@ -6,7 +6,7 @@
 
 ## A note on the name
 
-This project is called `nn` — no name, or close enough to type. The internal name *Sinyal Sejati* captures the spirit. `nn` is what you type in the terminal. Neither requires explanation before the work does.
+This project is called `nn` — no name, or close enough to type. `nn` is what you type in the terminal. Neither requires explanation before the work does.
 
 ---
 

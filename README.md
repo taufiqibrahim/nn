@@ -73,7 +73,7 @@ Right now, Indonesia's economic pilots — policy makers, business owners, labor
 
 They are not bad pilots. They are flying blind on bad instruments.
 
-Sinyal Sejati is the gauge panel they never had. Each node in the economic feedback loop gets a gauge:
+`nn` is the gauge panel they never had. Each node in the economic feedback loop gets a gauge:
 
 - **Wage gauge** — true wage vs cost-of-living adjusted wage. Are workers above or below the real waterline?
 - **Price gauge** — true producer cost vs what the market can actually absorb. How much suppressed pressure?
