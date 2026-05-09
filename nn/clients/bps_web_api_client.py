@@ -15,6 +15,7 @@ Example
 from __future__ import annotations
 
 import logging
+import os
 import pandas as pd
 import requests
 from tqdm import tqdm
@@ -27,6 +28,7 @@ logging.basicConfig(
     level=logging.INFO,
 )
 log = logging.getLogger(__name__)
+log.setLevel(os.getenv("LOG_LEVEL", "INFO").upper())
 
 
 def to_df(data: list[dict]) -> pd.DataFrame:
@@ -71,7 +73,7 @@ class BPSWebApiClient:
         p = {"key": self.token}
         if params:
             p.update(params)
-        log.info("GET %s %s", endpoint, p)
+        log.debug("GET %s %s", endpoint, p)
         res = self._session.get(f"{BASE_URL}/{endpoint}", params=p)
         res.raise_for_status()
         data = res.json()
@@ -101,7 +103,7 @@ class BPSWebApiClient:
 
         rows: list[dict] = [{f: item.get(f) for f in fields} for item in res["data"][1]]
         total_pages = res["data"][0]["pages"]
-        log.info("model=%s domain=%s total_pages=%d", model, domain, total_pages)
+        log.debug("model=%s domain=%s total_pages=%d", model, domain, total_pages)
 
         for page in tqdm(range(2, total_pages + 1), desc=model, leave=False):
             res = self._get("list", {**base_params, "page": page})
@@ -376,34 +378,28 @@ class BPSWebApiClient:
         as rows and years as columns containing the data values.
         """
         params: dict = {"model": "data", "domain": domain, "var": var, "th": th, "lang": lang}
-        log.info("get_data %s", 'initiate')
+        log.debug("get_data initiate")
 
         if turvar:
-            log.info("get_data turvar %s", turvar)
             params["turvar"] = turvar
         if vervar:
-            log.info("get_data vervar %s", vervar)
             params["vervar"] = vervar
         if turth:
-            log.info("get_data turth %s", turth)
             params["turth"] = turth
 
-        log.info("get_data call API started %s", params)
+        log.debug("get_data call API %s", params)
         res = self._get("list", params)
-        log.info("get_data call API finished")
 
-        log.info("get_data generate datacontent")
-        datacontent = pd.DataFrame(
-            {"key": res["datacontent"].keys(), "value": res["datacontent"].values()}
-        ).sort_values("key", ignore_index=True)
+        log.debug("get_data generate datacontent")
+        datacontent: dict = res["datacontent"]
 
-        log.info("get_data generate vervar_df")
+        log.debug("get_data generate vervar_df")
         vervar_df = pd.DataFrame(
             [[x["val"], x["label"]] for x in res["vervar"]],
             columns=["id_var", "variable"],
         ).sort_values("id_var", ignore_index=True)
 
-        log.info("get_data generate turvar_df")
+        log.debug("get_data generate turvar_df")
         turvar_df = pd.DataFrame(
             [[x["val"], x["label"]] for x in res["turvar"]],
             columns=["id_tur_var", "turunan variable"],
@@ -411,7 +407,7 @@ class BPSWebApiClient:
 
         result = vervar_df.merge(turvar_df, how="cross")
 
-        log.info("get_data generate turtahun_df")
+        log.debug("get_data generate turtahun_df")
         turtahun_df = None
         if "turtahun" in res:
             turtahun_df = pd.DataFrame(
@@ -425,20 +421,16 @@ class BPSWebApiClient:
             columns=["val", "label"],
         ).sort_values("val", ignore_index=True)
 
-        log.info("get_data tahun_df.iterrows")
+        log.debug("get_data building pivot")
         for _, year_row in tahun_df.iterrows():
-            result[year_row["label"]] = ""
-            for i, row in result.iterrows():
-                key = (
-                    str(row["id_var"])
-                    + str(var)
-                    + str(row["id_tur_var"])
-                    + str(year_row["val"])
-                    + (str(row["id_tur_th"]) if turtahun_df is not None else "")
-                )
-                match = datacontent.loc[datacontent["key"].str.match(f"^{key}"), "value"]
-                if not match.empty:
-                    result.at[i, year_row["label"]] = match.iloc[0]
+            keys = (
+                result["id_var"].astype(str)
+                + str(var)
+                + result["id_tur_var"].astype(str)
+                + str(year_row["val"])
+                + (result["id_tur_th"].astype(str) if turtahun_df is not None else "")
+            )
+            result[year_row["label"]] = keys.map(datacontent)
         log.info("get_data done")
 
         return result
