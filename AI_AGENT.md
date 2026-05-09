@@ -86,7 +86,7 @@ The red nodes are **hypotheses under investigation**, not confirmed conclusions.
 | Code, variable names, docstrings | English |
 | Notebook markdown (explanation) | Bahasa Indonesia |
 | README.md | Bilingual |
-| ROADMAP.md, docs | Bahasa Indonesia |
+| ROADMAP.md, docs | English now; Bahasa Indonesia when published |
 
 ---
 
