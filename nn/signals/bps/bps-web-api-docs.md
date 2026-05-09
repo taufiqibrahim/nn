@@ -1,4 +1,13 @@
-#### Badan Pusat Statistik
+# Badan Pusat Statistik
+
+Fetched from: https://webapi.bps.go.id/documentation
+
+Last fetched: 2026-05-09
+
+Methodology:
+- Copied from HTML into Google Docs.
+- Use export as Markdown
+- Manual and AI assisted clean up.
 
 # API Documentation
 
